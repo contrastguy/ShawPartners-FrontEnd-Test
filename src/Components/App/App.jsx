@@ -14,8 +14,7 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
-      const response = await api.get("/users")
-    ;
+      const response = await api.get("/users");
       setUsers(response.data);
       console.log(response.data);
       setLoading(false);
