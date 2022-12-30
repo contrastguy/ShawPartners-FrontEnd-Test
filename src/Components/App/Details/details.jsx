@@ -14,20 +14,28 @@ const UserDetails = () => {
   const [repos, setRepos] = useState([]);
 
   useEffect(() => {
-    const fetchUser =  () => {
+    const fetchUser = async () => {
       setLoading(true);
-      const response = fetch("https://api.github.com/users/" + localStorage.getItem("LOGIN"));
-      setUsers([response.data]);;
+      await fetch("https://api.github.com/users/" + localStorage.getItem("LOGIN"))
+      .then((res) => {
+        res.json().then((data) => {
+          setUsers([data]);
+          
+        })
+    });
       setLoading(false);
     };
     const fetchRepo = async () => {
-      const res = await api.get("/users/contrastguy/repos");
-      const data = res.data;
-      setRepos(data);
+      await fetch("https://api.github.com/users/" + localStorage.getItem("LOGIN") + "/repos")
+      .then((res) => {
+        res.json().then((data) => {
+          setRepos(data);
+        })
+      });
     };
-
     fetchUser();
     fetchRepo();
+    
   }, []);
 
   return (
@@ -39,13 +47,13 @@ const UserDetails = () => {
           {users.map((user) => (
             <div>
               <ListGroup.Item key={user.id}>ID: {user.id}</ListGroup.Item>
-              <ListGroup.Item key={user.login}>
+              <ListGroup.Item>
                 Login: {user.login}
               </ListGroup.Item>
-              <ListGroup.Item key={user.url}>
+              <ListGroup.Item>
                 Profile_url: {user.url}
               </ListGroup.Item>
-              <ListGroup.Item key={user.created_at}>
+              <ListGroup.Item>
                 Login Creation Date: {user.created_at}
               </ListGroup.Item>
             </div>
