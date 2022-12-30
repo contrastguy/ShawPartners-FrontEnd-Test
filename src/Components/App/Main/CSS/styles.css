@@ -1,0 +1,13 @@
+#title{
+    text-align: center;
+}
+
+.list-item :hover{
+    background-color: rgb(76, 76, 223);
+    color: white;
+}
+
+
+.pagination{
+    justify-content: center;
+}
