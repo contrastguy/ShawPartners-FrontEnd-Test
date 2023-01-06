@@ -16,6 +16,7 @@ const UserDetails = () => {
   useEffect(() => {
     const fetchUser = async () => {
       setLoading(true);
+      //Usei o fetch diretamente no front end , porque minha url do back end não estava funcionando
       await fetch("https://api.github.com/users/" + localStorage.getItem("LOGIN"))
       .then((res) => {
         res.json().then((data) => {
@@ -37,7 +38,7 @@ const UserDetails = () => {
     fetchRepo();
     
   }, []);
-
+ 
   return (
     <div>
       {loading ? (
